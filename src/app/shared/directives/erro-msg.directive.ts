@@ -4,8 +4,9 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
   selector: '[appErroMsg]',
 })
 export class ErroMsgDirective implements OnInit {
+  @Input() messaje: string = 'error';
   htmlElement!: ElementRef<HTMLElement>;
-  color: string = 'red';
+  @Input() color: string = 'red';
 
   constructor(private element: ElementRef<HTMLElement>) {
     this.htmlElement = this.element;
@@ -19,8 +20,13 @@ export class ErroMsgDirective implements OnInit {
     this.htmlElement.nativeElement.className = 'form-text';
   }
 
+  setMessaje() {
+    this.htmlElement.nativeElement.innerText = this.messaje;
+  }
+
   ngOnInit(): void {
     this.setColor();
     this.setClass();
+    this.setMessaje();
   }
 }
