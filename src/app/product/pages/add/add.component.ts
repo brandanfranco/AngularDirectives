@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add.component.css'],
 })
 export class AddComponent implements OnInit {
+  text: string = 'Damian';
+  color: string = 'red';
   MyForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
   });
@@ -17,5 +19,16 @@ export class AddComponent implements OnInit {
 
   requiredField(camp: string) {
     return this.MyForm.get(camp)?.invalid;
+  }
+
+  changeName() {
+    this.text = Math.random().toString();
+  }
+
+  changeColor() {
+    const color = '#xxxxxx'.replace(/x/g, (y) =>
+      ((Math.random() * 16) | 0).toString(16)
+    );
+    this.color = color;
   }
 }

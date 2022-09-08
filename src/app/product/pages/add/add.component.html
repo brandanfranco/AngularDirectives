@@ -4,7 +4,7 @@
 <form [formGroup]="MyForm">
   <div class="row g-3 align-items-center mb-5">
     <div class="col-auto">
-      <label class="col-form-label">Name</label>
+      <label class="col-form-label">Name </label>
     </div>
 
     <div class="col-auto">
@@ -13,22 +13,31 @@
 
     <div class="col-auto">
       <span
-        *ngIf="requiredField('name')"
-        messaje="required"
-        color="blue"
         appErroMsg
+        [message]="text"
+        [color]="color"
+        [value]="!requiredField('name')"
       >
-        this field is required</span
-      >
+      </span>
     </div>
   </div>
 
   <div class="row">
     <div class="col">
-      <button class="btn btn-primary">Save</button>
+      <button class="btn btn-primary" (click)="changeName()">Save</button>
+
+      <button class="btn btn-primary" (click)="changeColor()">
+        Change Color
+      </button>
     </div>
   </div>
 </form>
+
+<div class="row mt-5" *appCustomIf="MyForm.valid">
+  <div class="col">
+    <div class="alert alert-warning">OK</div>
+  </div>
+</div>
 
 <h3 class="mt-5">Form</h3>
 <pre>Values : {{ MyForm.value | json }}</pre>
